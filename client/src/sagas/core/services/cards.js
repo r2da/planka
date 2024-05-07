@@ -86,7 +86,7 @@ export function* handleCardUpdate(card) {
   yield put(actions.handleCardUpdate(card));
 }
 
-export function* moveCard(id, listId, index) {
+export function* moveCard(id, listId, index = 0) {
   const position = yield select(selectors.selectNextCardPosition, listId, index, id);
 
   yield call(updateCard, id, {
@@ -101,7 +101,7 @@ export function* moveCurrentCard(listId, index) {
   yield call(moveCard, cardId, listId, index);
 }
 
-export function* transferCard(id, boardId, listId, index) {
+export function* transferCard(id, boardId, listId, index = 0) {
   const { cardId: currentCardId, boardId: currentBoardId } = yield select(selectors.selectPath);
   const position = yield select(selectors.selectNextCardPosition, listId, index, id);
 
@@ -207,6 +207,12 @@ export function* handleCardDelete(card) {
   yield put(actions.handleCardDelete(card));
 }
 
+export function* handleTextFilter(text) {
+  const { boardId } = yield select(selectors.selectPath);
+
+  yield put(actions.filterText(boardId, text));
+}
+
 export default {
   createCard,
   handleCardCreate,
@@ -222,4 +228,5 @@ export default {
   deleteCard,
   deleteCurrentCard,
   handleCardDelete,
+  handleTextFilter,
 };
