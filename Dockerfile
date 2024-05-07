@@ -29,6 +29,8 @@ RUN DISABLE_ESLINT_PLUGIN=true npm run build
 
 FROM node:18-alpine
 
+ENV TZ=America/Sao_Paulo
+
 RUN apk -U upgrade \
   && apk add bash \
   --no-cache
