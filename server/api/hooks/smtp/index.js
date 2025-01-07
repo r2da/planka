@@ -27,6 +27,7 @@ module.exports = function defineSmtpHook(sails) {
         pool: true,
         host: sails.config.custom.smtpHost,
         port: sails.config.custom.smtpPort,
+        name: sails.config.custom.smtpName,
         secure: sails.config.custom.smtpSecure,
         //auth: sails.config.custom.smtpUser && {
           //user: sails.config.custom.smtpUser,
@@ -35,6 +36,9 @@ module.exports = function defineSmtpHook(sails) {
         tls: {
             // do not fail on invalid certs
             rejectUnauthorized: false
+        },
+        tls: {
+          rejectUnauthorized: sails.config.custom.smtpTlsRejectUnauthorized,
         },
       });
     },
